@@ -8,835 +8,426 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #0d0d0f;
-      --bg2: #111114;
-      --bg3: #16161a;
-      --border: rgba(255,255,255,0.07);
-      --border-hover: rgba(255,255,255,0.14);
-      --text: #e8e8ee;
-      --text-muted: #7a7a8a;
-      --text-dim: #4a4a5a;
-      --accent: #a78bfa;
-      --accent2: #818cf8;
-      --accent-glow: rgba(167,139,250,0.12);
-      --green: #34d399;
-      --amber: #fbbf24;
-      --mono: 'JetBrains Mono', monospace;
-      --sans: 'Inter', sans-serif;
+      --bg: #0d0d0f; --bg2: #111114; --bg3: #16161a;
+      --border: rgba(255,255,255,0.07); --border-hover: rgba(255,255,255,0.14);
+      --text: #e8e8ee; --text-muted: #7a7a8a; --text-dim: #4a4a5a;
+      --accent: #a78bfa; --accent-glow: rgba(167,139,250,0.12);
+      --green: #34d399; --amber: #fbbf24;
+      --mono: 'JetBrains Mono', monospace; --sans: 'Inter', sans-serif;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.7;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
 
     /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2.5rem;
-      height: 60px;
-      background: rgba(13,13,15,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 13px;
-      font-family: var(--mono);
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-    }
-
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 60px; background: rgba(13,13,15,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-family: var(--mono); letter-spacing: 0.04em; transition: color 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
     /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      position: relative;
-    }
+    #hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 6rem 2rem 4rem; position: relative; }
+    .hero-eyebrow { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards; }
+    .hero-name { font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.25rem; opacity: 0; animation: fadeUp 0.6s ease 0.35s forwards; }
+    .hero-name span { background: linear-gradient(135deg, #a78bfa 0%, #818cf8 50%, #67e8f9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1rem; color: var(--text-muted); max-width: 480px; margin: 0 auto 2.5rem; opacity: 0; animation: fadeUp 0.6s ease 0.5s forwards; }
+    .hero-badges { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.6s ease 0.65s forwards; }
+    .badge { font-family: var(--mono); font-size: 11px; padding: 5px 12px; border-radius: 100px; border: 1px solid var(--border); color: var(--text-muted); background: var(--bg3); letter-spacing: 0.04em; }
+    .hero-cta { display: flex; gap: 1rem; opacity: 0; animation: fadeUp 0.6s ease 0.8s forwards; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s; font-family: var(--sans); }
+    .btn-primary { background: var(--accent); color: #0d0d0f; }
+    .btn-primary:hover { background: #b99df8; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--border-hover); color: var(--text); transform: translateY(-1px); }
+    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0; animation: fadeIn 1s ease 1.5s forwards; }
+    .scroll-hint::after { content: ''; display: block; width: 1px; height: 32px; background: var(--border); margin: 0.5rem auto 0; animation: pulse 2s ease infinite; }
 
-    .hero-eyebrow {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.2s forwards;
-    }
-
-    .hero-name {
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-      margin-bottom: 1.25rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.35s forwards;
-    }
-
-    .hero-name span {
-      background: linear-gradient(135deg, #a78bfa 0%, #818cf8 50%, #67e8f9 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 1rem;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.5s forwards;
-    }
-
-    .hero-badges {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 3rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.65s forwards;
-    }
-
-    .badge {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 5px 12px;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      background: var(--bg3);
-      letter-spacing: 0.04em;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      opacity: 0;
-      animation: fadeUp 0.6s ease 0.8s forwards;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 10px 22px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
-      font-family: var(--sans);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #0d0d0f;
-    }
-
-    .btn-primary:hover {
-      background: #b99df8;
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--border-hover);
-      color: var(--text);
-      transform: translateY(-1px);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeIn 1s ease 1.5s forwards;
-    }
-
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 32px;
-      background: var(--border);
-      margin: 0.5rem auto 0;
-      animation: pulse 2s ease infinite;
-    }
-
-    /* SECTIONS */
-    section {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 6rem 2rem;
-    }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-size: 1.9rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 2.5rem;
-      color: var(--text);
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      max-width: 820px;
-      margin: 0 auto;
-    }
+    /* LAYOUT */
+    section { max-width: 820px; margin: 0 auto; padding: 6rem 2rem; }
+    .section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .section-title { font-size: 1.9rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 2.5rem; }
+    .divider { height: 1px; background: var(--border); max-width: 820px; margin: 0 auto; }
 
     /* ABOUT */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-
-    .about-text p {
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      font-size: 14.5px;
-    }
-
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .about-text p { color: var(--text-muted); margin-bottom: 1rem; font-size: 14.5px; }
     .about-text p:last-child { margin-bottom: 0; }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      align-content: start;
-    }
-
-    .stat-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1.2rem;
-      transition: border-color 0.2s;
-    }
-
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-content: start; }
+    .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.2rem; transition: border-color 0.2s; }
     .stat-card:hover { border-color: var(--border-hover); }
-
-    .stat-num {
-      font-family: var(--mono);
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      letter-spacing: 0.03em;
-    }
+    .stat-num { font-family: var(--mono); font-size: 1.6rem; font-weight: 500; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-size: 12px; color: var(--text-dim); }
 
     /* SKILLS */
-    .skills-group {
-      margin-bottom: 2.5rem;
-    }
-
-    .skills-group-title {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .skill-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .skill-pill {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 7px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg2);
-      font-size: 13px;
-      color: var(--text-muted);
-      transition: all 0.2s;
-      cursor: default;
-    }
-
-    .skill-pill:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-glow);
-    }
-
-    .skill-pill .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: 0.6;
-    }
-
-    .skill-pill.learning {
-      border-style: dashed;
-      opacity: 0.7;
-    }
-
+    .skills-group { margin-bottom: 2.5rem; }
+    .skills-group-title { font-family: var(--mono); font-size: 12px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .skill-pill { display: flex; align-items: center; gap: 0.4rem; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg2); font-size: 13px; color: var(--text-muted); transition: all 0.2s; cursor: default; }
+    .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+    .skill-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.6; }
+    .skill-pill.learning { border-style: dashed; opacity: 0.7; }
     .skill-pill.learning .dot { background: var(--amber); }
+    .skill-pill.learning:hover { border-color: var(--amber); color: var(--amber); background: rgba(251,191,36,0.08); opacity: 1; }
+    .learn-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .learn-table th { font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; text-align: left; padding: 0 1rem 0.75rem 0; border-bottom: 1px solid var(--border); }
+    .learn-table td { padding: 0.75rem 1rem 0.75rem 0; border-bottom: 1px solid var(--border); font-size: 13.5px; color: var(--text-muted); vertical-align: top; }
+    .learn-table tr:last-child td { border-bottom: none; }
+    .learn-table td:first-child { font-family: var(--mono); font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+    .learn-table td:nth-child(2) { color: var(--accent); font-family: var(--mono); font-size: 12px; white-space: nowrap; padding-right: 1.5rem; }
 
-    .skill-pill.learning:hover {
-      border-color: var(--amber);
-      color: var(--amber);
-      background: rgba(251,191,36,0.08);
-      opacity: 1;
-    }
+    /* ENGINE GRID */
+    .engine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .engine-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; transition: border-color 0.2s, transform 0.2s; }
+    .engine-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .engine-item-title { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 0.35rem; }
+    .engine-item-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+    .engine-note { margin-top: 1.5rem; font-family: var(--mono); font-size: 12px; color: var(--text-dim); border-left: 2px solid var(--accent); padding-left: 1rem; font-style: italic; }
 
     /* PROJECTS */
-    .project-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.75rem;
-      margin-bottom: 1.25rem;
-      transition: border-color 0.25s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .project-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
-
+    .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.25rem; transition: border-color 0.25s, transform 0.2s; position: relative; overflow: hidden; }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0; transition: opacity 0.3s; }
+    .project-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
     .project-card:hover::before { opacity: 1; }
-
-    .project-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 0.75rem;
-    }
-
-    .project-name {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .project-status {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 100px;
-      border: 1px solid;
-    }
-
-    .status-wip {
-      color: var(--amber);
-      border-color: rgba(251,191,36,0.3);
-      background: rgba(251,191,36,0.06);
-    }
-
-    .status-done {
-      color: var(--green);
-      border-color: rgba(52,211,153,0.3);
-      background: rgba(52,211,153,0.06);
-    }
-
-    .project-desc {
-      color: var(--text-muted);
-      font-size: 13.5px;
-      margin-bottom: 1rem;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .project-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 9px;
-      border-radius: 6px;
-      background: var(--bg3);
-      color: var(--text-dim);
-      border: 1px solid var(--border);
-    }
-
-    .coming-soon {
-      text-align: center;
-      padding: 3rem;
-      border: 1px dashed var(--border);
-      border-radius: 12px;
-      color: var(--text-dim);
-      font-family: var(--mono);
-      font-size: 13px;
-      letter-spacing: 0.05em;
-    }
+    .project-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.5rem; gap: 1rem; }
+    .project-name { font-size: 1rem; font-weight: 500; color: var(--text); }
+    .project-genre { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-bottom: 0.75rem; }
+    .project-status { font-family: var(--mono); font-size: 11px; padding: 3px 10px; border-radius: 100px; border: 1px solid; white-space: nowrap; flex-shrink: 0; }
+    .status-wip { color: var(--amber); border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.06); }
+    .status-done { color: var(--green); border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.06); }
+    .project-desc { color: var(--text-muted); font-size: 13.5px; margin-bottom: 1rem; }
+    .project-learning { margin-bottom: 1rem; }
+    .project-learning-title { font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .project-learning-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .learn-tag { font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 6px; background: rgba(167,139,250,0.08); color: var(--accent); border: 1px solid rgba(167,139,250,0.2); }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .project-tag { font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 6px; background: var(--bg3); color: var(--text-dim); border: 1px solid var(--border); }
+    .coming-soon { text-align: center; padding: 3rem; border: 1px dashed var(--border); border-radius: 12px; color: var(--text-dim); font-family: var(--mono); font-size: 13px; letter-spacing: 0.05em; }
 
     /* TIMELINE */
-    .timeline {
-      position: relative;
-      padding-left: 1.5rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px; bottom: 8px;
-      width: 1px;
-      background: var(--border);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2rem;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -1.5rem;
-      top: 8px;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      transform: translateX(-3px);
-    }
-
-    .timeline-date {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 0.08em;
-      margin-bottom: 0.3rem;
-    }
-
-    .timeline-title {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-
-    .timeline-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--border); }
+    .timeline-item { position: relative; margin-bottom: 2rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -1.5rem; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); transform: translateX(-3px); }
+    .timeline-date { font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+    .timeline-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }
+    .timeline-sub { font-size: 13px; color: var(--text-muted); }
 
     /* CONTACT */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
+    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .contact-link { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; padding: 1.5rem 1rem; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text-muted); transition: all 0.2s; }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); transform: translateY(-2px); }
+    .contact-icon { font-size: 1.4rem; }
+    .contact-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; }
 
-    .contact-link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 1.5rem 1rem;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 13px;
-      transition: all 0.2s;
-    }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.05em; }
 
-    .contact-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-glow);
-      transform: translateY(-2px);
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .contact-icon {
-      font-size: 1.5rem;
-    }
-
-    .contact-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid var(--border);
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.3; }
-      50%       { opacity: 1; }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* RESPONSIVE */
     @media (max-width: 640px) {
-      nav { padding: 0 1.25rem; }
-      .nav-links { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 0 1.25rem; } .nav-links { display: none; }
+      .about-grid, .engine-grid, .contact-grid { grid-template-columns: 1fr; }
       .hero-cta { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">rithvik.dev</div>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#contact">contact</a></li>
-    </ul>
-  </nav>
+<nav>
+  <div class="nav-logo">rithvik.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#engine">engine</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <p class="hero-eyebrow">// game developer &amp; software developer</p>
-    <h1 class="hero-name"><span>Rithvik Padamata</span></h1>
-    <p class="hero-sub">
-      Building worlds inside Unreal Engine. Writing code across the stack.
-      First-year CSE undergrad with a long way to go — and enjoying every step.
-    </p>
-    <div class="hero-badges">
-      <span class="badge">Unreal Engine</span>
-      <span class="badge">Blender</span>
-      <span class="badge">Blueprints</span>
-      <span class="badge">C / Java / Python</span>
-      <span class="badge">Flutter</span>
-    </div>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">View Projects</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
-    </div>
-    <div class="scroll-hint">scroll</div>
-  </section>
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">// game developer &amp; software developer</p>
+  <h1 class="hero-name"><span>Rithvik Padamata</span></h1>
+  <p class="hero-sub">Building worlds inside Unreal Engine. Writing code across the stack. CSE undergrad with a long way to go — and enjoying every step.</p>
+  <div class="hero-badges">
+    <span class="badge">Unreal Engine 5</span>
+    <span class="badge">Blender</span>
+    <span class="badge">Blueprints</span>
+    <span class="badge">C / Java / Python</span>
+    <span class="badge">Flutter · Dart</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
 
-  <div class="divider"></div>
+<div class="divider"></div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="reveal">
-      <p class="section-label">// 01 — about</p>
-      <h2 class="section-title">Who I am</h2>
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">// 01 — about</p>
+    <h2 class="section-title">Who I am</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>Computer Science undergraduate with a clear focus on game development and real-time 3D. Working across the full pipeline — modelling and building assets directly inside Unreal Engine, designing gameplay systems with Blueprints, and handling lighting, animation, and cinematics in-engine.</p>
+      <p>My direction is clear: go deep into game engines, understand how they actually work under the hood, and ship things worth playing.</p>
+      <p>Alongside game dev, expanding into full-stack web development, AR/VR/XR, and the core mechanics of the engine itself — because understanding both sides makes you sharper at both.</p>
     </div>
-    <div class="about-grid reveal">
-      <div class="about-text">
-        <p>
-          I'm a first-year Computer Science undergraduate with a clear focus on game development.
-          I work across the full pipeline — modelling and rigging in Blender, building environments
-          and gameplay logic in Unreal Engine, and writing code in multiple languages.
-        </p>
-        <p>
-          My interests sit at the intersection of engineering and creative work.
-          I care about how things look and how they run.
-        </p>
-        <p>
-          Alongside game development, I'm building towards full-stack web development —
-          learning React, Node.js, and REST APIs to broaden what I can build.
-        </p>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">UE5</div><div class="stat-label">Primary engine</div></div>
+      <div class="stat-card"><div class="stat-num">6+</div><div class="stat-label">Languages known</div></div>
+      <div class="stat-card"><div class="stat-num">CSE</div><div class="stat-label">B.Tech undergrad</div></div>
+      <div class="stat-card"><div class="stat-num">2 WIP</div><div class="stat-label">Active projects</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">// 02 — skills</p>
+    <h2 class="section-title">What I work with</h2>
+  </div>
+  <div class="skills-group reveal">
+    <p class="skills-group-title">Game Development</p>
+    <div class="skill-pills">
+      <span class="skill-pill"><span class="dot"></span>Unreal Engine 5</span>
+      <span class="skill-pill"><span class="dot"></span>Blueprints</span>
+      <span class="skill-pill"><span class="dot"></span>Level Design</span>
+      <span class="skill-pill"><span class="dot"></span>Materials &amp; Textures</span>
+      <span class="skill-pill"><span class="dot"></span>Animations</span>
+      <span class="skill-pill"><span class="dot"></span>In-Engine Modelling</span>
+      <span class="skill-pill"><span class="dot"></span>Prop Building</span>
+      <span class="skill-pill"><span class="dot"></span>Cinematics</span>
+      <span class="skill-pill"><span class="dot"></span>Blender</span>
+      <span class="skill-pill"><span class="dot"></span>UV Unwrapping</span>
+      <span class="skill-pill"><span class="dot"></span>Rigging</span>
+    </div>
+  </div>
+  <div class="skills-group reveal">
+    <p class="skills-group-title">Programming</p>
+    <div class="skill-pills">
+      <span class="skill-pill"><span class="dot"></span>C</span>
+      <span class="skill-pill"><span class="dot"></span>Java</span>
+      <span class="skill-pill"><span class="dot"></span>Python</span>
+      <span class="skill-pill"><span class="dot"></span>JavaScript</span>
+      <span class="skill-pill"><span class="dot"></span>Dart</span>
+      <span class="skill-pill"><span class="dot"></span>Flutter</span>
+    </div>
+  </div>
+  <div class="skills-group reveal">
+    <p class="skills-group-title">Currently learning</p>
+    <div class="skill-pills">
+      <span class="skill-pill learning"><span class="dot"></span>C++</span>
+      <span class="skill-pill learning"><span class="dot"></span>React</span>
+      <span class="skill-pill learning"><span class="dot"></span>Node.js</span>
+      <span class="skill-pill learning"><span class="dot"></span>REST APIs</span>
+      <span class="skill-pill learning"><span class="dot"></span>Full-Stack Web</span>
+      <span class="skill-pill learning"><span class="dot"></span>AR / VR / XR</span>
+    </div>
+    <table class="learn-table reveal">
+      <thead><tr><th>#</th><th>Topic</th><th>Focus</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td>C++</td><td>Unreal-native scripting · performance-critical gameplay systems</td></tr>
+        <tr><td>02</td><td>React</td><td>Component architecture · building UI from scratch</td></tr>
+        <tr><td>03</td><td>Node.js</td><td>Server-side logic · REST API design</td></tr>
+        <tr><td>04</td><td>Full-Stack</td><td>Connecting frontend to backend end-to-end</td></tr>
+        <tr><td>05</td><td>AR / VR / XR</td><td>Immersive and spatial computing experiences</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ENGINE DEEP DIVE -->
+<section id="engine">
+  <div class="reveal">
+    <p class="section-label">// 03 — going deeper</p>
+    <h2 class="section-title">Engine &amp; Systems</h2>
+  </div>
+  <div class="engine-grid reveal">
+    <div class="engine-item">
+      <div class="engine-item-title">C++ for Unreal</div>
+      <div class="engine-item-desc">Moving from Blueprints to native C++ for gameplay classes, components, and performance-critical logic</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Game Loop &amp; Tick System</div>
+      <div class="engine-item-desc">How Unreal's engine tick works, delta time, and frame-rate independent movement</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Rendering Pipeline</div>
+      <div class="engine-item-desc">How meshes, shaders, and lighting passes work inside a real-time renderer</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Memory &amp; Asset Management</div>
+      <div class="engine-item-desc">Streaming levels, garbage collection, soft references vs hard references in UE5</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Physics &amp; Collision</div>
+      <div class="engine-item-desc">Chaos physics system, collision channels, and trace queries from first principles</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">AI Fundamentals</div>
+      <div class="engine-item-desc">Behaviour Trees, Blackboards, and EQS (Environment Query System) in Unreal</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Shader Development</div>
+      <div class="engine-item-desc">Custom HLSL in Unreal's material editor and how GPU pipelines process them</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Sound &amp; VFX</div>
+      <div class="engine-item-desc">MetaSounds for adaptive audio · Niagara for particle systems and ability effects</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Skeletal Mesh &amp; Animation</div>
+      <div class="engine-item-desc">Animation Blueprints, blend spaces, montages, and IK systems for character movement</div>
+    </div>
+    <div class="engine-item">
+      <div class="engine-item-title">Optimisation</div>
+      <div class="engine-item-desc">LODs, draw call reduction, culling strategies, and profiling for cross-hardware performance</div>
+    </div>
+  </div>
+  <p class="engine-note reveal">The goal is not just to use the engine — it's to understand why it works the way it does.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label">// 04 — projects</p>
+    <h2 class="section-title">Work</h2>
+  </div>
+  <div class="reveal">
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-name">Star Wars Cinematic — Unreal Engine 5</div>
+        <span class="project-status status-wip">in progress</span>
       </div>
-      <div class="stat-grid">
-        <div class="stat-card">
-          <div class="stat-num">UE5</div>
-          <div class="stat-label">Primary engine</div>
+      <p class="project-genre">// cinematic · environment art · real-time rendering</p>
+      <p class="project-desc">A short cinematic built entirely inside Unreal Engine 5 — no external tools. The spaceship, props, and environment were all modelled and constructed directly within UE5. Texturing, lighting, sequencing, and the final render were done in-engine from start to finish. Every asset was built from scratch — nothing sourced from a marketplace.</p>
+      <div class="project-tags">
+        <span class="project-tag">UE5 Modelling Tools</span>
+        <span class="project-tag">Sequencer</span>
+        <span class="project-tag">In-Engine Prop Building</span>
+        <span class="project-tag">Lighting</span>
+        <span class="project-tag">PBR Texturing</span>
+        <span class="project-tag">Cinematics</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-name">Grand Line Odyssey</div>
+        <span class="project-status status-wip">in progress</span>
+      </div>
+      <p class="project-genre">// adventure · open world · unreal engine 5</p>
+      <p class="project-desc">An open-world adventure game built entirely from scratch in Unreal Engine 5. Inspired by the world of One Piece and the gameplay loop of Blox Fruits — every system is being constructed from the ground up deliberately, as a way to force deep technical understanding of how games actually work.</p>
+      <p class="project-desc">The project is intentionally ambitious. The goal is not just to ship a game but to learn the hard parts by building them — sound design, skeletal mesh pipelines, cinematic cutscenes, VFX, and performance optimisation that keeps the game running across different hardware.</p>
+      <div class="project-learning">
+        <p class="project-learning-title">Building to learn</p>
+        <div class="project-learning-list">
+          <span class="learn-tag">Sound Systems</span>
+          <span class="learn-tag">Skeletal Mesh &amp; Animation</span>
+          <span class="learn-tag">Cinematic Views</span>
+          <span class="learn-tag">Niagara VFX</span>
+          <span class="learn-tag">Optimisation &amp; LODs</span>
+          <span class="learn-tag">Combat Systems</span>
+          <span class="learn-tag">Gameplay Progression</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">6+</div>
-          <div class="stat-label">Languages known</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">Y1</div>
-          <div class="stat-label">B.Tech CSE</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">2 WIP</div>
-          <div class="stat-label">Active projects</div>
-        </div>
       </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="reveal">
-      <p class="section-label">// 02 — skills</p>
-      <h2 class="section-title">What I work with</h2>
-    </div>
-
-    <div class="skills-group reveal">
-      <p class="skills-group-title">Game Development</p>
-      <div class="skill-pills">
-        <span class="skill-pill"><span class="dot"></span>Unreal Engine 5</span>
-        <span class="skill-pill"><span class="dot"></span>Blueprints</span>
-        <span class="skill-pill"><span class="dot"></span>Level Design</span>
-        <span class="skill-pill"><span class="dot"></span>Materials &amp; Textures</span>
-        <span class="skill-pill"><span class="dot"></span>Animations</span>
-        <span class="skill-pill"><span class="dot"></span>3D Modelling in UE</span>
-        <span class="skill-pill"><span class="dot"></span>Blender</span>
-        <span class="skill-pill"><span class="dot"></span>UV Unwrapping</span>
-        <span class="skill-pill"><span class="dot"></span>Rigging</span>
+      <div class="project-tags">
+        <span class="project-tag">Unreal Engine 5</span>
+        <span class="project-tag">Blueprints</span>
+        <span class="project-tag">Animation Blueprints</span>
+        <span class="project-tag">MetaSounds</span>
+        <span class="project-tag">Niagara</span>
+        <span class="project-tag">Sequencer</span>
       </div>
     </div>
 
-    <div class="skills-group reveal">
-      <p class="skills-group-title">Programming</p>
-      <div class="skill-pills">
-        <span class="skill-pill"><span class="dot"></span>C</span>
-        <span class="skill-pill"><span class="dot"></span>Java</span>
-        <span class="skill-pill"><span class="dot"></span>Python</span>
-        <span class="skill-pill"><span class="dot"></span>JavaScript</span>
-        <span class="skill-pill"><span class="dot"></span>Dart</span>
-        <span class="skill-pill"><span class="dot"></span>Flutter</span>
-      </div>
+    <div class="coming-soon">more projects shipping soon</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <p class="section-label">// 05 — education</p>
+    <h2 class="section-title">Background</h2>
+  </div>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-date">2024 — 2028</div>
+      <div class="timeline-title">B.Tech, Computer Science &amp; Engineering</div>
+      <div class="timeline-sub">Year 1 completed</div>
     </div>
-
-    <div class="skills-group reveal">
-      <p class="skills-group-title">Currently learning</p>
-      <div class="skill-pills">
-        <span class="skill-pill learning"><span class="dot"></span>C++</span>
-        <span class="skill-pill learning"><span class="dot"></span>React</span>
-        <span class="skill-pill learning"><span class="dot"></span>Node.js</span>
-        <span class="skill-pill learning"><span class="dot"></span>REST APIs</span>
-        <span class="skill-pill learning"><span class="dot"></span>Full-stack Web</span>
-      </div>
+    <div class="timeline-item">
+      <div class="timeline-date">ongoing</div>
+      <div class="timeline-title">C++ for Unreal Engine</div>
+      <div class="timeline-sub">Self-directed — engine-level scripting beyond Blueprints</div>
     </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="reveal">
-      <p class="section-label">// 03 — projects</p>
-      <h2 class="section-title">Work</h2>
+    <div class="timeline-item">
+      <div class="timeline-date">ongoing</div>
+      <div class="timeline-title">Full-Stack Web Development</div>
+      <div class="timeline-sub">React · Node.js · REST APIs</div>
     </div>
-
-    <div class="reveal">
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">Star Wars Cinematic — Unreal Engine</div>
-          <span class="project-status status-wip">in progress</span>
-        </div>
-        <p class="project-desc">
-          A short cinematic rendered entirely in Unreal Engine 5.
-          The spaceship was modelled from scratch in Blender, textured using
-          sourced materials, and lit and rendered inside UE5.
-          An independent study in environment art, real-time rendering, and cinematic sequencing.
-        </p>
-        <div class="project-tags">
-          <span class="project-tag">Unreal Engine 5</span>
-          <span class="project-tag">Blender</span>
-          <span class="project-tag">3D Modelling</span>
-          <span class="project-tag">Cinematic Sequencer</span>
-          <span class="project-tag">Lighting</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-name">Untitled Project 2</div>
-          <span class="project-status status-wip">in progress</span>
-        </div>
-        <p class="project-desc">
-          Second active game development project. Details and a playable build
-          will be published here on completion.
-        </p>
-        <div class="project-tags">
-          <span class="project-tag">Unreal Engine 5</span>
-          <span class="project-tag">Blueprints</span>
-        </div>
-      </div>
-
-      <div class="coming-soon">
-        more projects shipping soon
-      </div>
+    <div class="timeline-item">
+      <div class="timeline-date">upcoming</div>
+      <div class="timeline-title">AR / VR / XR Development</div>
+      <div class="timeline-sub">Immersive and spatial computing — learning roadmap in progress</div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="divider"></div>
+<div class="divider"></div>
 
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="reveal">
-      <p class="section-label">// 04 — education</p>
-      <h2 class="section-title">Background</h2>
-    </div>
-    <div class="timeline reveal">
-      <div class="timeline-item">
-        <div class="timeline-date">2024 — 2028</div>
-        <div class="timeline-title">B.Tech, Computer Science &amp; Engineering</div>
-        <div class="timeline-sub">Year 1 completed</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">ongoing</div>
-        <div class="timeline-title">C++ for Unreal Engine</div>
-        <div class="timeline-sub">Self-directed — engine-level scripting beyond Blueprints</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">ongoing</div>
-        <div class="timeline-title">Full-Stack Web Development</div>
-        <div class="timeline-sub">React · Node.js · REST APIs</div>
-      </div>
-    </div>
-  </section>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-label">// 06 — contact</p>
+    <h2 class="section-title">Get in touch</h2>
+  </div>
+  <div class="contact-grid reveal">
+    <a class="contact-link" href="mailto:padamata.rithvik@gmail.com">
+      <span class="contact-icon">✉</span>
+      <span class="contact-label">Email</span>
+      <span style="font-size:11px;opacity:0.6;text-align:center;">padamata.rithvik</span>
+    </a>
+    <a class="contact-link" href="https://www.linkedin.com/in/rithvik-p-7496773b3/" target="_blank">
+      <span class="contact-icon">in</span>
+      <span class="contact-label">LinkedIn</span>
+      <span style="font-size:11px;opacity:0.6;">rithvik-p</span>
+    </a>
+    <a class="contact-link" href="https://github.com/Rithvik2P" target="_blank">
+      <span class="contact-icon">⌥</span>
+      <span class="contact-label">GitHub</span>
+      <span style="font-size:11px;opacity:0.6;">Rithvik2P</span>
+    </a>
+  </div>
+</section>
 
-  <div class="divider"></div>
+<footer>rithvik padamata · 2025 · built with intention</footer>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="reveal">
-      <p class="section-label">// 05 — contact</p>
-      <h2 class="section-title">Get in touch</h2>
-    </div>
-    <div class="contact-grid reveal">
-      <a class="contact-link" href="mailto:padamata.rithvik@gmail.com">
-        <span class="contact-icon">✉</span>
-        <span class="contact-label">Email</span>
-        <span style="font-size:11px; opacity:0.6;">padamata.rithvik</span>
-      </a>
-      <a class="contact-link" href="https://www.linkedin.com/in/rithvik-p-7496773b3/" target="_blank">
-        <span class="contact-icon">in</span>
-        <span class="contact-label">LinkedIn</span>
-        <span style="font-size:11px; opacity:0.6;">rithvik-p</span>
-      </a>
-      <a class="contact-link" href="https://github.com/Rithvik2P" target="_blank">
-        <span class="contact-icon">⌥</span>
-        <span class="contact-label">GitHub</span>
-        <span style="font-size:11px; opacity:0.6;">Rithvik2P</span>
-      </a>
-    </div>
-  </section>
-
-  <footer>
-    <span>rithvik padamata · 2025 · built with intention</span>
-  </footer>
-
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
-
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
